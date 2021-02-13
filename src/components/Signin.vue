@@ -1,0 +1,31 @@
+<template>
+  <div class="signup">
+    <form>
+      <label for="email">email</label>
+      <input type="email" id="email" v-model="password" />
+      <label for="password">password</label>
+      <input type="password" id="password" v-model="password" />
+      <button onClick="signIn">Sing In</button>
+    </form>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
+
+@Component
+export default class Signup extends Vue {
+  mailAddress = '';
+  password = '';
+
+  signIn() {
+    firebase.auth().createUserWithEmailAndPassword(this.mailAddress, this.password)
+      .then(
+        // 成功時の処理
+      ).catch(
+        // エラー時の処理
+      );
+  }
+}
+</script>

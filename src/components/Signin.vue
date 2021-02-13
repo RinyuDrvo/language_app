@@ -7,6 +7,7 @@
       <input type="password" id="password" v-model="password" />
       <button @click.prevent="signIn">Sing In</button>
     </form>
+    <router-link :to="{ name: 'Signup'}">Sign Up</router-link>
   </div>
 </template>
 
@@ -23,9 +24,10 @@ export default class Signup extends Vue {
     firebase.auth().signInWithEmailAndPassword(this.mailAddress, this.password)
       .then(() => {
         // 成功時の処理
-        alert('success')
-      }).catch(() => {
+        this.$router.push({ name: 'Home' })
+      }).catch((error) => {
         // エラー時の処理
+        throw new Error(error);
       });
   }
 }

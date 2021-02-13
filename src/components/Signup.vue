@@ -15,6 +15,7 @@
       </tr>
     </table>
     <button @click='signUp'>登録</button>
+    <router-link :to="{ name: 'Signin' }">Sign In</router-link>
   </div>
 </template>
 

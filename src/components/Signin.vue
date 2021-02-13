@@ -2,10 +2,10 @@
   <div class="signup">
     <form>
       <label for="email">email</label>
-      <input type="email" id="email" v-model="password" />
+      <input type="email" id="email" v-model="mailAddress" />
       <label for="password">password</label>
       <input type="password" id="password" v-model="password" />
-      <button onClick="signIn">Sing In</button>
+      <button @click.prevent="signIn">Sing In</button>
     </form>
   </div>
 </template>
@@ -20,12 +20,13 @@ export default class Signup extends Vue {
   password = '';
 
   signIn() {
-    firebase.auth().createUserWithEmailAndPassword(this.mailAddress, this.password)
-      .then(
+    firebase.auth().signInWithEmailAndPassword(this.mailAddress, this.password)
+      .then(() => {
         // 成功時の処理
-      ).catch(
+        alert('success')
+      }).catch(() => {
         // エラー時の処理
-      );
+      });
   }
 }
 </script>

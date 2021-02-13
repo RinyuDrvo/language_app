@@ -1,20 +1,12 @@
 <template>
   <div class="signup">
-    <table>
-      <tr>
-        <th>メールアドレス</th>
-      </tr>
-      <tr>
-        <td><input type="email" v-model="mailAddress" /></td>
-      </tr>
-      <tr>
-        <th>パスワード：</th>
-      </tr>
-      <tr>
-        <td><input type="password" v-model="password" /></td>
-      </tr>
-    </table>
-    <button @click='signUp'>登録</button>
+    <form>
+      <label for="email">emali</label>
+      <input type="email" v-model="mailAddress" id="email" />
+      <label for="password">password</label>
+      <input type="password" v-model="password" id="password" />
+      <button @click.prevent="signUp">Sing Up</button>
+    </form>
     <router-link :to="{ name: 'Signin' }">Sign In</router-link>
   </div>
 </template>

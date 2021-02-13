@@ -1,5 +1,6 @@
 <template>
   <div class="signup">
+    <h1>Sign Up</h1>
     <form>
       <label for="email">emali</label>
       <input type="email" v-model="mailAddress" id="email" />
@@ -22,11 +23,13 @@ export default class Signup extends Vue {
 
   signUp() {
     firebase.auth().createUserWithEmailAndPassword(this.mailAddress, this.password)
-      .then(
+      .then(() => {
         // 成功時の処理
-      ).catch(
+        this.$router.push({ name: "Signin" })
+      }).catch((error) => {
         // エラー時の処理
-      );
+        throw new Error(error);
+      });
   }
 }
 </script>

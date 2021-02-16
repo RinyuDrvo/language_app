@@ -16,7 +16,7 @@ export default class Home extends Vue {
       // Sign out successful
     }).catch((error) => {
       // An error happened
-      console.log(error);
+      throw new Error(error);
     })
   }
 }

@@ -8,28 +8,47 @@
       <input type="password" id="password" v-model="password" />
       <button @click.prevent="signIn">Sing In</button>
     </form>
-    <router-link :to="{ name: 'Signup'}">Sign Up</router-link>
+    <router-link :to="{ name: 'Signup' }">Sign Up</router-link>
+
+    <dialog id="dialog">
+      <h1>Error</h1>
+      <p>{{ errorMessage }}</p>
+      <button @click="closeDialog">CLOSE</button>
+    </dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import firebase from 'firebase';
+import { Component, Vue } from "vue-property-decorator";
+import firebase from "firebase";
 
 @Component
 export default class Signup extends Vue {
-  mailAddress = '';
-  password = '';
+  mailAddress = "";
+  password = "";
+  errorMessage = "";
+
+  get dialog(): HTMLDialogElement {
+    return document.getElementById("dialog") as HTMLDialogElement;
+  }
 
   signIn() {
-    firebase.auth().signInWithEmailAndPassword(this.mailAddress, this.password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.mailAddress, this.password)
       .then(() => {
-        // 成功時の処理
-        this.$router.push({ name: 'Home' })
-      }).catch((error) => {
-        // エラー時の処理
-        throw new Error(error);
+        // ログイン成功時
+        this.$router.push({ name: "Home" });
+      })
+      .catch((error) => {
+        // ログイン失敗時
+        this.errorMessage = error.message;
+        this.dialog.showModal();
       });
+  }
+
+  closeDialog() {
+    this.dialog.close();
   }
 }
 </script>

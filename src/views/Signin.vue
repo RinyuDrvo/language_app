@@ -1,17 +1,17 @@
 <template>
-  <div class="home">
-    <Home />
+  <div>
+    <Signin />
   </div>
 </template>
 
 <script lang="ts">
-import Home from "@/components/Home.vue";
+import Signin from "@/components/Signin.vue";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
-    Home,
+    Signin,
   },
 })
-export default class HomeView extends Vue {}
+export default class SigninView extends Vue {}
 </script>

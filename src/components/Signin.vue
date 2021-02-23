@@ -1,15 +1,14 @@
 <template>
-  <div class="signup">
-    <h1>Sign Up</h1>
+  <div class="signin">
+    <h1>Sign In</h1>
     <form>
-      <label for="email">emali</label>
-      <input type="email" v-model="mailAddress" id="email" />
+      <label for="email">email</label>
+      <input type="email" id="email" v-model="mailAddress" />
       <label for="password">password</label>
-      <input type="password" v-model="password" id="password" />
-      <button @click.prevent="signUp">Sing Up</button>
+      <input type="password" id="password" v-model="password" />
+      <button @click.prevent="signIn">Sing In</button>
     </form>
-    <router-link :to="{ name: 'Signin' }">Sign In</router-link>
-
+    <router-link :to="{ name: 'Signup' }">Sign Up</router-link>
     <auth-error-dialog
       :errorMessage="errorMessage"
       v-model="isShowErrorModal"
@@ -33,16 +32,16 @@ export default class Signup extends Vue {
   errorMessage = "";
   isShowErrorModal = false;
 
-  signUp() {
+  signIn() {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.mailAddress, this.password)
+      .signInWithEmailAndPassword(this.mailAddress, this.password)
       .then(() => {
-        // 成功時の処理
-        this.$router.push({ name: "Signin" });
+        // ログイン成功時
+        this.$router.push({ name: "Home" });
       })
       .catch((error) => {
-        // エラー時の処理
+        // ログイン失敗時
         this.errorMessage = error.message;
         this.isShowErrorModal = true;
       });

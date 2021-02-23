@@ -34,6 +34,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  // ログイン状態でなければサインインに遷移
   if (requiresAuth) {
     firebase.auth().onAuthStateChanged(user => {
       if (!user) next({ name: 'Signin' })

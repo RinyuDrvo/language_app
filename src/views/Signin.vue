@@ -4,13 +4,14 @@
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import Signin from '@/components/Signin.vue';
+<script lang="ts">
+import Signin from "@/components/Signin.vue";
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
+@Component({
   components: {
-    Signin
-  }
-}
+    Signin,
+  },
+})
+export default class SigninView extends Vue {}
 </script>

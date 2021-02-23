@@ -9,28 +9,28 @@
       <button @click.prevent="signIn">Sing In</button>
     </form>
     <router-link :to="{ name: 'Signup' }">Sign Up</router-link>
-
-    <dialog id="dialog">
-      <h1>Error</h1>
-      <p>{{ errorMessage }}</p>
-      <button @click="closeDialog">CLOSE</button>
-    </dialog>
+    <auth-error-dialog
+      :errorMessage="errorMessage"
+      v-model="isShowErrorModal"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
+import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
 
-@Component
+@Component({
+  components: {
+    AuthErrorDialog,
+  },
+})
 export default class Signup extends Vue {
   mailAddress = "";
   password = "";
   errorMessage = "";
-
-  get dialog(): HTMLDialogElement {
-    return document.getElementById("dialog") as HTMLDialogElement;
-  }
+  isShowErrorModal = false;
 
   signIn() {
     firebase
@@ -43,12 +43,8 @@ export default class Signup extends Vue {
       .catch((error) => {
         // ログイン失敗時
         this.errorMessage = error.message;
-        this.dialog.showModal();
+        this.isShowErrorModal = true;
       });
-  }
-
-  closeDialog() {
-    this.dialog.close();
   }
 }
 </script>

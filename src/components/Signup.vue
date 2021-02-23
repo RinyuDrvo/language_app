@@ -9,26 +9,42 @@
       <button @click.prevent="signUp">Sing Up</button>
     </form>
     <router-link :to="{ name: 'Signin' }">Sign In</router-link>
+
+    <auth-error-dialog
+      :errorMessage="errorMessage"
+      v-model="isShowErrorModal"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import firebase from 'firebase';
+import { Component, Vue } from "vue-property-decorator";
+import firebase from "firebase";
+import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
 
-@Component
+@Component({
+  components: {
+    AuthErrorDialog,
+  },
+})
 export default class Signup extends Vue {
-  mailAddress = '';
-  password = '';
+  mailAddress = "";
+  password = "";
+  errorMessage = "";
+  isShowErrorModal = false;
 
   signUp() {
-    firebase.auth().createUserWithEmailAndPassword(this.mailAddress, this.password)
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.mailAddress, this.password)
       .then(() => {
         // 成功時の処理
-        this.$router.push({ name: "Signin" })
-      }).catch((error) => {
+        this.$router.push({ name: "Signin" });
+      })
+      .catch((error) => {
         // エラー時の処理
-        throw new Error(error);
+        this.errorMessage = error.message;
+        this.isShowErrorModal = true;
       });
   }
 }

@@ -2,7 +2,7 @@
   <Dialog :isShowModal="value">
     <h1>Error</h1>
     <p>{{ errorMessage }}</p>
-    <button @click="input">CLOSE</button>
+    <button @click="onClick">CLOSE</button>
   </Dialog>
 </template>
 
@@ -19,7 +19,7 @@ export default class AuthErrorDialog extends Vue {
   @Prop({ required: true }) errorMessage!: string;
   @Prop({ required: true }) value!: boolean;
 
-  @Emit() input() {
+  @Emit("input") onClick() {
     return false;
   }
 }

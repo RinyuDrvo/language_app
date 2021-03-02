@@ -20,4 +20,12 @@ async function signIn(email: string, password: string) {
   return await firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
-export { signUp, signIn };
+/**
+ * Firebase Authentication log out
+ * @return {Promise<void>}
+ */
+async function signOut() {
+  return await firebase.auth().signOut();
+}
+
+export { signUp, signIn, signOut };

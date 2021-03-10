@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
+import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import * as Firebase from "@/service/FirebaseService";
 
 @Component({

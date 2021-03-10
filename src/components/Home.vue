@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import firebase from "firebase";
 import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
+import * as Firebase from "@/service/FirebaseService";
 
 @Component({
   components: {
@@ -24,18 +24,11 @@ export default class Home extends Vue {
   errorMessage = "";
   isShowErrorModal = false;
 
-  logout() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // Sign out successful
-      })
-      .catch((error) => {
-        // An error happened
-        this.errorMessage = error.message;
-        this.isShowErrorModal = true;
-      });
+  async logout() {
+    await Firebase.signOut().catch((error) => {
+      this.errorMessage = error.message;
+      this.isShowErrorModal = true;
+    });
   }
 }
 </script>

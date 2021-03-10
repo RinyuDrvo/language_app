@@ -3,7 +3,7 @@
     <h1>Sign In</h1>
     <form>
       <label for="email">email</label>
-      <input type="email" id="email" v-model="mailAddress" />
+      <input type="email" id="email" v-model="email" />
       <label for="password">password</label>
       <input type="password" id="password" v-model="password" />
       <button @click.prevent="signIn">Sing In</button>
@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import firebase from "firebase";
 import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
+import * as Firebase from "@/service/FirebaseService";
 
 @Component({
   components: {
@@ -27,21 +27,17 @@ import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
   },
 })
 export default class Signup extends Vue {
-  mailAddress = "";
+  email = "";
   password = "";
   errorMessage = "";
   isShowErrorModal = false;
 
-  signIn() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.mailAddress, this.password)
+  async signIn() {
+    await Firebase.signIn(this.email, this.password)
       .then(() => {
-        // ログイン成功時
         this.$router.push({ name: "Home" });
       })
       .catch((error) => {
-        // ログイン失敗時
         this.errorMessage = error.message;
         this.isShowErrorModal = true;
       });

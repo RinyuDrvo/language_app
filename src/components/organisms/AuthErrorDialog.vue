@@ -8,7 +8,7 @@
 
 <script lang='ts'>
 import { Component, Prop, Emit, Vue } from "vue-property-decorator";
-import Dialog from "@/components/organisms/Dialog.vue";
+import Dialog from "@/components/organisms/BaseDialog.vue";
 
 @Component({
   components: {

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import Signin from "@/components/Signin.vue";
+import Signin from "@/components/pages/Signin.vue";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({

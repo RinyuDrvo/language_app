@@ -14,6 +14,10 @@ class Auth extends VuexModule {
     this.user = user;
   }
 
+  /**
+   * sign up action
+   * @param {RegistParams} params
+   */
   @Action
   async signUp(params: RegistParams) {
     return await Firebase.signUp(params.email, params.password)
@@ -23,6 +27,10 @@ class Auth extends VuexModule {
       })
   }
 
+  /**
+   * sign in action
+   * @param {LoginParams} params
+   */
   @Action
   async signIn(params: LoginParams) {
     return await Firebase.signIn(params.email, params.password)
@@ -32,6 +40,9 @@ class Auth extends VuexModule {
       })
   }
 
+  /**
+   * sign out action
+   */
   @Action
   async signOut() {
     return await Firebase.signOut()

@@ -32,6 +32,13 @@ class Auth extends VuexModule {
       })
   }
 
+  @Action
+  async signOut() {
+    return await Firebase.signOut()
+      .then(() => {
+        this.setUser('');
+      })
+  }
 }
 
 export const AuthModule = getModule(Auth);

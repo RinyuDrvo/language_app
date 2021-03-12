@@ -18,10 +18,8 @@ class Auth extends VuexModule {
   async signUp(params: RegistParams) {
     return await Firebase.signUp(params.email, params.password)
       .then((userCredential) => {
-        // ユーザーをセット
-        userCredential.user?.email ?
-          this.setUser(userCredential.user.email) :
-          this.setUser('');
+        const setParam = userCredential.user?.email || '';
+        this.setUser(setParam);
       })
   }
 
@@ -29,11 +27,11 @@ class Auth extends VuexModule {
   async signIn(params: LoginParams) {
     return await Firebase.signIn(params.email, params.password)
       .then((userCredential) => {
-        const setParam = userCredential.user?.email ?
-          userCredential.user?.email : '';
+        const setParam = userCredential.user?.email || '';
         this.setUser(setParam);
       })
   }
+
 }
 
 export const AuthModule = getModule(Auth);

@@ -18,8 +18,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AuthErrorDialog from "@/components/AuthErrorDialog.vue";
-import * as Firebase from "@/service/FirebaseService";
+import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
+import { AuthModule } from "@/store/modules/AuthStore";
+import { LoginParams } from "@/models/UserModel";
 
 @Component({
   components: {
@@ -33,12 +34,17 @@ export default class Signup extends Vue {
   isShowErrorModal = false;
 
   async signIn() {
-    await Firebase.signIn(this.email, this.password)
+    const loginParams: LoginParams = {
+      email: this.email,
+      password: this.password,
+    };
+
+    await AuthModule.signIn(loginParams)
       .then(() => {
         this.$router.push({ name: "Home" });
       })
-      .catch((error) => {
-        this.errorMessage = error.message;
+      .catch((err) => {
+        this.errorMessage = err.message;
         this.isShowErrorModal = true;
       });
   }

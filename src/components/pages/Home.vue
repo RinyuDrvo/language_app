@@ -15,6 +15,7 @@ import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import BaseButton from "@/components/atoms/BaseButton.vue";
+import { ROUTER_NAMES } from "@/constants/routerNames";
 
 @Component({
   components: {
@@ -27,10 +28,14 @@ export default class Home extends Vue {
   isShowErrorModal = false;
 
   async logout() {
-    await AuthModule.signOut().catch((err) => {
-      this.errorMessage = err.message;
-      this.isShowErrorModal = true;
-    });
+    await AuthModule.signOut()
+      .then(() => {
+        this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
+      })
+      .catch((err) => {
+        this.errorMessage = err.message;
+        this.isShowErrorModal = true;
+      });
   }
 }
 </script>

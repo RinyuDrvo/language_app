@@ -27,6 +27,7 @@ import { AuthModule } from "@/store/modules/AuthStore";
 import { RegistParams } from "@/models/UserModel";
 import SignupForm from "@/components/molecules/SignupForm.vue";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
+import { ROUTER_NAMES } from "@/constants/routerNames";
 
 @Component({
   components: {
@@ -52,7 +53,7 @@ export default class Signup extends Vue {
   private async signUp() {
     await AuthModule.signUp(this.registParams)
       .then(() => {
-        this.$router.push({ name: "Signin" });
+        this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
       })
       .catch((err) => {
         this.errorMessage = err.message;
@@ -61,7 +62,7 @@ export default class Signup extends Vue {
   }
 
   private onClickSignin() {
-    this.$router.push({ name: "Signin" });
+    this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
   }
 }
 </script>

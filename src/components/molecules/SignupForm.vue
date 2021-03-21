@@ -42,7 +42,7 @@ export default class SigninForm extends Vue {
     password: "",
   };
 
-  /** サインインクリックイベント */
+  /** サインアップクリックイベント */
   @Prop({ required: true })
   signupEvent!: () => {};
 

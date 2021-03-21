@@ -1,8 +1,17 @@
 <template>
   <div class="signup">
-    <h1>Sign Up</h1>
-    <SignupForm :signupEvent="signUp" v-model="registParams" />
-    <router-link :to="{ name: 'Signin' }">Sign In</router-link>
+    <h1 class="signup__title">Sign Up</h1>
+    <SignupForm
+      class="signup__form"
+      :signupEvent="signUp"
+      v-model="registParams"
+    />
+    <BaseButton
+      class="signup__button--signin"
+      :clickEvent="onClickSignin"
+      :buttonStyle="signupButtonStyle"
+      >SIGN IN</BaseButton
+    >
 
     <auth-error-dialog
       :errorMessage="errorMessage"
@@ -17,17 +26,24 @@ import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import { RegistParams } from "@/models/UserModel";
 import SignupForm from "@/components/molecules/SignupForm.vue";
+import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
 
 @Component({
   components: {
     AuthErrorDialog,
     SignupForm,
+    BaseButton,
   },
 })
 export default class Signup extends Vue {
   private registParams: RegistParams = {
     email: "",
     password: "",
+  };
+
+  private signupButtonStyle: ButtonStyle = {
+    color: "gray",
+    backgroundColor: "#ddd",
   };
 
   private errorMessage = "";
@@ -43,5 +59,36 @@ export default class Signup extends Vue {
         this.isShowErrorModal = true;
       });
   }
+
+  private onClickSignin() {
+    this.$router.push({ name: "Signin" });
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.signup {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 5rem;
+    color: gray;
+  }
+
+  &__form {
+    margin-bottom: 1rem;
+  }
+
+  &__button {
+    &--signin {
+      margin-bottom: 10rem;
+    }
+  }
+}
+</style>

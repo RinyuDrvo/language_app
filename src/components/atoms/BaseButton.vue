@@ -27,15 +27,15 @@ const defaultButtonStyle: ButtonStyle = {
 
 @Component
 export default class BaseButton extends Vue {
-  // ボタンクリック時イベント
+  /** ボタンクリック時イベント */
   @Prop({ required: true })
   clickEvent!: () => {};
 
-  // disabled制御
+  /** disabled制御 */
   @Prop({ default: false })
   isDisabled!: boolean;
 
-  // スタイル指定
+  /** スタイル指定 */
   @Prop({ default: () => defaultButtonStyle })
   buttonStyle!: ButtonStyle;
 }

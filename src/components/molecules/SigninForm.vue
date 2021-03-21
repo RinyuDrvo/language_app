@@ -42,11 +42,11 @@ export default class SigninForm extends Vue {
     password: "",
   };
 
-  // サインインクリックイベント
+  /** サインインクリックイベント */
   @Prop({ required: true })
   signinEvent!: () => {};
 
-  // クリックイベントで親コンポーネントに入力情報を渡す
+  /** クリックイベントで親コンポーネントに入力情報を渡す */
   private onClickSignin() {
     this.signinEvent();
   }

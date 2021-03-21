@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="clickEvent"
+    @click.prevent="clickEvent"
     :style="{
       color: buttonStyle.color,
       backgroundColor: buttonStyle.backgroundColor,

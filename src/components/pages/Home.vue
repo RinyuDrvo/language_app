@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>Home</h1>
-    <button @click="logout">logout</button>
+    <BaseButton :clickEvent="logout">LOGOUT</BaseButton>
 
     <auth-error-dialog
       :errorMessage="errorMessage"
@@ -14,10 +14,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
+import BaseButton from "@/components/atoms/BaseButton.vue";
 
 @Component({
   components: {
     AuthErrorDialog,
+    BaseButton,
   },
 })
 export default class Home extends Vue {

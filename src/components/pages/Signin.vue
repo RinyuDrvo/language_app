@@ -3,7 +3,7 @@
     <h1>Sign In</h1>
     <form>
       <label for="email">email</label>
-      <input type="email" id="email" v-model="email" />
+      <BaseTextbox id="email" v-model="email" :inputSize="20" :maxLength="50" />
       <label for="password">password</label>
       <input type="password" id="password" v-model="password" />
       <button @click.prevent="signIn">Sing In</button>
@@ -21,10 +21,12 @@ import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import { LoginParams } from "@/models/UserModel";
+import BaseTextbox from "@/components/atoms/BaseTextbox.vue";
 
 @Component({
   components: {
     AuthErrorDialog,
+    BaseTextbox,
   },
 })
 export default class Signup extends Vue {

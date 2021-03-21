@@ -9,7 +9,7 @@
       :inputSize="20"
       :maxLength="50"
     />
-    <label for="password">password</label>
+    <label for="password" class="signin-form__label">password</label>
     <BaseTextbox
       class="signin-form__textbox"
       id="password"
@@ -18,7 +18,9 @@
       :inputSize="20"
       :maxLength="50"
     />
-    <BaseButton :clickEvent="onClickSignin">SIGN IN</BaseButton>
+    <BaseButton :clickEvent="onClickSignin" class="signin-form__button"
+      >SIGN IN</BaseButton
+    >
   </form>
 </template>
 
@@ -61,3 +63,26 @@ export default class SigninForm extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  &__label {
+    margin-bottom: 0.5rem;
+    color: gray;
+  }
+
+  &__textbox {
+    margin-bottom: 1rem;
+  }
+
+  &__button {
+    margin-top: 0.5rem;
+  }
+}
+</style>

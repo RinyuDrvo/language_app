@@ -49,4 +49,9 @@ export default class BaseButton extends Vue {
   font-size: 1rem;
   cursor: pointer;
 }
+
+.base-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 0.5px gray;
+}
 </style>

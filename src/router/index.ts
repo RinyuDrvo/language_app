@@ -4,25 +4,29 @@ import Home from '../views/Home.vue'
 import Signup from '@/views/Signup.vue';
 import Signin from '@/views/Signin.vue';
 import firebase from 'firebase';
+import { ROUTER_NAMES } from "@/constants/routerNames";
+import * as Firebase from "@/service/FirebaseService";
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
+    name: ROUTER_NAMES.LANGUAGE,
     component: Home,
-    meta: { requiresAuth: true }
+    meta: { auth: true }
   },
   {
     path: '/signup',
-    name: 'Signup',
-    component: Signup
+    name: ROUTER_NAMES.SIGN_UP,
+    component: Signup,
+    meta: { auth: false }
   },
   {
     path: '/signin',
-    name: 'Signin',
-    component: Signin
+    name: ROUTER_NAMES.SIGN_IN,
+    component: Signin,
+    meta: { auth: false }
   },
 ]
 
@@ -33,15 +37,23 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const authView = to.matched.some(record => record.meta.auth);
 
-  // ログイン状態でなければサインインに遷移
-  if (requiresAuth) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) next({ name: 'Signin' })
-    })
-  }
-  next();
+  Firebase.onAuthStateChanged((user) => {
+    if (user) {
+      // 認証状態
+      // 認証時に遷移しない画面はホームに遷移
+      authView === false ?
+        next({ name: ROUTER_NAMES.LANGUAGE }) :
+        next();
+    }
+
+    // 非認証状態
+    // 認証が必要な画面に遷移する場合はリダイレクト
+    if (authView) next({ name: ROUTER_NAMES.SIGN_IN })
+
+    next();
+  });
 })
 
 export default router

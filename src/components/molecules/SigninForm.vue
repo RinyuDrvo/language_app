@@ -58,7 +58,7 @@ export default class SigninForm extends Vue {
 
   /** 子コンポーネント入力の検知 */
   @Watch("loginParams", { immediate: true, deep: true })
-  onChangeForm(val: LoginParams, oldVal: LoginParams) {
+  onChangeForm() {
     this.updateValue();
   }
 }

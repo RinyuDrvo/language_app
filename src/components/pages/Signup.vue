@@ -1,13 +1,7 @@
 <template>
   <div class="signup">
     <h1>Sign Up</h1>
-    <form>
-      <label for="email">emali</label>
-      <input type="email" v-model="email" id="email" />
-      <label for="password">password</label>
-      <input type="password" v-model="password" id="password" />
-      <button @click.prevent="signUp">Sing Up</button>
-    </form>
+    <SignupForm :signupEvent="signUp" v-model="registParams" />
     <router-link :to="{ name: 'Signin' }">Sign In</router-link>
 
     <auth-error-dialog
@@ -22,25 +16,25 @@ import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import { RegistParams } from "@/models/UserModel";
+import SignupForm from "@/components/molecules/SignupForm.vue";
 
 @Component({
   components: {
     AuthErrorDialog,
+    SignupForm,
   },
 })
 export default class Signup extends Vue {
-  email = "";
-  password = "";
-  errorMessage = "";
-  isShowErrorModal = false;
+  private registParams: RegistParams = {
+    email: "",
+    password: "",
+  };
 
-  async signUp() {
-    const registParams: RegistParams = {
-      email: this.email,
-      password: this.password,
-    };
+  private errorMessage = "";
+  private isShowErrorModal = false;
 
-    await AuthModule.signUp(registParams)
+  private async signUp() {
+    await AuthModule.signUp(this.registParams)
       .then(() => {
         this.$router.push({ name: "Signin" });
       })

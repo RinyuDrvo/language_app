@@ -30,10 +30,10 @@ export default class Signup extends Vue {
     password: "",
   };
 
-  errorMessage = "";
-  isShowErrorModal = false;
+  private errorMessage = "";
+  private isShowErrorModal = false;
 
-  async signUp() {
+  private async signUp() {
     await AuthModule.signUp(this.registParams)
       .then(() => {
         this.$router.push({ name: "Signin" });

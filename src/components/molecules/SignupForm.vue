@@ -70,7 +70,6 @@ export default class SigninForm extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
 
   &__label {
     margin-bottom: 0.5rem;

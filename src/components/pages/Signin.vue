@@ -27,6 +27,7 @@ import { AuthModule } from "@/store/modules/AuthStore";
 import { LoginParams } from "@/models/UserModel";
 import SigninForm from "@/components/molecules/SigninForm.vue";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
+import { ROUTER_NAMES } from "@/constants/routerNames";
 
 @Component({
   components: {
@@ -52,7 +53,7 @@ export default class Signup extends Vue {
   private async signIn() {
     await AuthModule.signIn(this.loginParams)
       .then(() => {
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: ROUTER_NAMES.LANGUAGE }).catch(() => {});
       })
       .catch((err) => {
         this.errorMessage = err.message;
@@ -61,7 +62,7 @@ export default class Signup extends Vue {
   }
 
   private onClickSignup() {
-    this.$router.push({ name: "Signup" });
+    this.$router.push({ name: ROUTER_NAMES.SIGN_UP }).catch(() => {});
   }
 }
 </script>

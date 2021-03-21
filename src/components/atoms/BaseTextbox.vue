@@ -18,26 +18,27 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class BaseTextbox extends Vue {
   private value = "";
 
-  // 入力タイプ指定
+  /** 入力タイプ指定 */
   @Prop({ default: "text" })
   inputType!: string;
 
-  // プレースホルダー
+  /** プレースホルダー */
   @Prop({ default: "" })
   placeholder!: string;
 
-  // サイズ指定
+  /** サイズ */
   @Prop({ required: true })
   inputSize!: number;
 
-  // 最大文字数指定
+  /** 最大文字数 */
   @Prop({ default: 20 })
   maxLength!: number;
 
-  // labelとの連携id指定
+  /** labelとの連携id */
   @Prop({ required: true })
   id!: string;
 
+  /** 入力イベント伝達 */
   private updateValue(event: Event) {
     // イベントがInputイベント以外のものであれば逃す
     const { target } = event;
@@ -49,15 +50,18 @@ export default class BaseTextbox extends Vue {
 </script>
 
 <style lang="scss" scoped>
+$dark-cherry: #e4bad4;
+$light-cherry: #f6daeb;
+
 .base-textbox {
   padding: 0.2rem;
   border-radius: 5px;
-  border: 2px solid #f6daeb;
-  box-shadow: 0 0 5px 0.5px #f6daeb inset;
+  border: 2px solid $light-cherry;
+  box-shadow: 0 0 5px 0.5px $light-cherry inset;
 }
 
 .base-textbox:focus {
-  border: 2px solid #e4bad4;
+  border: 2px solid $dark-cherry;
   outline: 0;
 }
 </style>

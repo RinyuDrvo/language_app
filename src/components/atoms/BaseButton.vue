@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="clickEvent"
+    @click.prevent="clickEvent"
     :style="{
       color: buttonStyle.color,
       backgroundColor: buttonStyle.backgroundColor,
@@ -22,20 +22,20 @@ export interface ButtonStyle {
 
 const defaultButtonStyle: ButtonStyle = {
   color: "white",
-  backgroundColor: "#CAF7E3",
+  backgroundColor: "#e4bad4",
 };
 
 @Component
 export default class BaseButton extends Vue {
-  // ボタンクリック時イベント
+  /** ボタンクリック時イベント */
   @Prop({ required: true })
   clickEvent!: () => {};
 
-  // disabled制御
+  /** disabled制御 */
   @Prop({ default: false })
   isDisabled!: boolean;
 
-  // スタイル指定
+  /** スタイル指定 */
   @Prop({ default: () => defaultButtonStyle })
   buttonStyle!: ButtonStyle;
 }
@@ -48,5 +48,10 @@ export default class BaseButton extends Vue {
   border-radius: 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.base-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px 0.5px gray;
 }
 </style>

@@ -28,4 +28,15 @@ async function signOut() {
   return await firebase.auth().signOut();
 }
 
-export { signUp, signIn, signOut };
+/**
+ * Firebase Authentication onAuthStateChanged
+ * @param {(user: firebase.User | null) => void} authEvent
+ */
+function onAuthStateChanged(authEvent: (user: firebase.User | null) => void) {
+  firebase.auth().onAuthStateChanged((user) => {
+    authEvent(user)
+  });
+
+}
+
+export { signUp, signIn, signOut, onAuthStateChanged };

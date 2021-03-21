@@ -22,7 +22,7 @@ export interface ButtonStyle {
 
 const defaultButtonStyle: ButtonStyle = {
   color: "white",
-  backgroundColor: "#CAF7E3",
+  backgroundColor: "#e4bad4",
 };
 
 @Component

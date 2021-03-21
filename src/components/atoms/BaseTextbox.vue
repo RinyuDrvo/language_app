@@ -49,15 +49,18 @@ export default class BaseTextbox extends Vue {
 </script>
 
 <style lang="scss" scoped>
+$dark-cherry: #e4bad4;
+$light-cherry: #f6daeb;
+
 .base-textbox {
   padding: 0.2rem;
   border-radius: 5px;
-  border: 2px solid #f6daeb;
-  box-shadow: 0 0 5px 0.5px #f6daeb inset;
+  border: 2px solid $light-cherry;
+  box-shadow: 0 0 5px 0.5px $light-cherry inset;
 }
 
 .base-textbox:focus {
-  border: 2px solid #e4bad4;
+  border: 2px solid $dark-cherry;
   outline: 0;
 }
 </style>

@@ -53,7 +53,7 @@ export default class Signup extends Vue {
   private async signUp() {
     await AuthModule.signUp(this.registParams)
       .then(() => {
-        this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
+        this.$router.push({ name: ROUTER_NAMES.LANGUAGE }).catch(() => {});
       })
       .catch((err) => {
         this.errorMessage = err.message;

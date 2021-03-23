@@ -36,24 +36,28 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  const authView = to.matched.some(record => record.meta.auth);
+router.beforeEach(async (to, from, next) => {
+  // 認証状態によるルーティング
+  await Firebase.onAuthStateChanged((user) => {
+    // 認証が必要な画面かどうかを取得
+    const authView = to.matched.some(record => record.meta.auth);
 
-  Firebase.onAuthStateChanged((user) => {
     if (user) {
       // 認証状態
       // 認証時に遷移しない画面はホームに遷移
       authView === false ?
         next({ name: ROUTER_NAMES.LANGUAGE }) :
         next();
+    } else {
+      // 非認証状態
+      // 認証が必要な画面に遷移する場合はリダイレクト
+      if (authView) next({ name: ROUTER_NAMES.SIGN_IN })
     }
-
-    // 非認証状態
-    // 認証が必要な画面に遷移する場合はリダイレクト
-    if (authView) next({ name: ROUTER_NAMES.SIGN_IN })
 
     next();
   });
+
+  next();
 })
 
 export default router

@@ -14,7 +14,10 @@
         >FORM</BaseButton
       >
     </div>
-    <BaseButton class="navbar__button--logout" :clickEvent="logout"
+    <BaseButton
+      class="navbar__button--logout"
+      :clickEvent="logout"
+      :buttonStyle="logoutButtonStyle"
       >LOG OUT</BaseButton
     >
 
@@ -40,13 +43,18 @@ export default class NavBar extends Vue {
   isShowErrorModal = false;
 
   listButtonStyle: ButtonStyle = {
-    color: "gray",
-    backgroundColor: "#caf7e3",
+    color: "white",
+    backgroundColor: "#e4bad4",
   };
 
   formButtonStyle: ButtonStyle = {
+    color: "white",
+    backgroundColor: "#f6dfeb",
+  };
+
+  logoutButtonStyle: ButtonStyle = {
     color: "gray",
-    backgroundColor: "#edffec",
+    backgroundColor: "#ddd",
   };
 
   /** ログアウト処理 */

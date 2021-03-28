@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+import Language from '@/views/Language.vue'
 import Signup from '@/views/Signup.vue';
 import Signin from '@/views/Signin.vue';
-import firebase from 'firebase';
+import LanguageList from '@/components/organisms/LanguageList.vue';
+import LanguageAdd from '@/components/organisms/LanguageAdd.vue';
 import { ROUTER_NAMES } from "@/constants/routerNames";
 import * as Firebase from "@/service/FirebaseService";
 
@@ -12,9 +13,20 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: ROUTER_NAMES.LANGUAGE,
-    component: Home,
-    meta: { auth: true }
+    component: Language,
+    meta: { auth: true },
+    children: [
+      {
+        path: '',
+        component: LanguageList,
+        name: ROUTER_NAMES.LANGUAGE_LIST
+      },
+      {
+        path: 'add',
+        component: LanguageAdd,
+        name: ROUTER_NAMES.LANGUAGE_ADD
+      }
+    ]
   },
   {
     path: '/signup',
@@ -46,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
       // 認証状態
       // 認証時に遷移しない画面はホームに遷移
       authView === false ?
-        next({ name: ROUTER_NAMES.LANGUAGE }) :
+        next({ name: ROUTER_NAMES.LANGUAGE_LIST }) :
         next();
     } else {
       // 非認証状態

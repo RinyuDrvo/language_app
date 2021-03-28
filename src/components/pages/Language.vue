@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <h1>Home</h1>
-    <BaseButton :clickEvent="logout">LOGOUT</BaseButton>
+    <NavBar />
+    <router-view></router-view>
 
     <auth-error-dialog
       :errorMessage="errorMessage"
@@ -13,17 +13,17 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
+import NavBar from "@/components/organisms/NavBar.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
-import BaseButton from "@/components/atoms/BaseButton.vue";
 import { ROUTER_NAMES } from "@/constants/routerNames";
 
 @Component({
   components: {
     AuthErrorDialog,
-    BaseButton,
+    NavBar,
   },
 })
-export default class Home extends Vue {
+export default class Language extends Vue {
   errorMessage = "";
   isShowErrorModal = false;
 

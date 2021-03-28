@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <Home />
+    <Language />
   </div>
 </template>
 
 <script lang="ts">
-import Home from "@/components/pages/Home.vue";
+import Language from "@/components/pages/Language.vue";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
-    Home,
+    Language,
   },
 })
-export default class HomeView extends Vue {}
+export default class LanguageView extends Vue {}
 </script>

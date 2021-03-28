@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <NavBar />
+    <router-view></router-view>
 
     <auth-error-dialog
       :errorMessage="errorMessage"

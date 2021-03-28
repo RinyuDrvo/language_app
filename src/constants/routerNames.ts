@@ -1,5 +1,6 @@
 export const ROUTER_NAMES = {
-  LANGUAGE: "Language",
   SIGN_IN: "Signin",
-  SIGN_UP: "Signup"
+  SIGN_UP: "Signup",
+  LANGUAGE_LIST: "LanguageList",
+  LANGUAGE_ADD: "LanuguageAdd"
 } as const;

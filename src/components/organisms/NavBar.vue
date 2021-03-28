@@ -3,20 +3,20 @@
     <div>
       <BaseButton
         class="navbar__button--list"
-        :clickEvent="() => {}"
+        :clickEvent="onClickLanguageList"
         :buttonStyle="listButtonStyle"
         >LIST</BaseButton
       >
       <BaseButton
         class="navbar__button--form"
-        :clickEvent="() => {}"
+        :clickEvent="onClickLanguageAdd"
         :buttonStyle="formButtonStyle"
-        >FORM</BaseButton
+        >ADD</BaseButton
       >
     </div>
     <BaseButton
       class="navbar__button--logout"
-      :clickEvent="logout"
+      :clickEvent="onClickLogout"
       :buttonStyle="logoutButtonStyle"
       >LOG OUT</BaseButton
     >
@@ -57,8 +57,18 @@ export default class NavBar extends Vue {
     backgroundColor: "#ddd",
   };
 
+  /** 言語一覧に遷移 */
+  onClickLanguageList() {
+    this.$router.push({ name: ROUTER_NAMES.LANGUAGE_LIST });
+  }
+
+  /** 言語追加に遷移 */
+  onClickLanguageAdd() {
+    this.$router.push({ name: ROUTER_NAMES.LANGUAGE_ADD });
+  }
+
   /** ログアウト処理 */
-  async logout() {
+  async onClickLogout() {
     await AuthModule.signOut()
       .then(() => {
         this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});

@@ -23,7 +23,7 @@ import { ROUTER_NAMES } from "@/constants/routerNames";
     BaseButton,
   },
 })
-export default class Home extends Vue {
+export default class Language extends Vue {
   errorMessage = "";
   isShowErrorModal = false;
 

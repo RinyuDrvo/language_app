@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+import Language from '@/views/Language.vue'
 import Signup from '@/views/Signup.vue';
 import Signin from '@/views/Signin.vue';
-import firebase from 'firebase';
 import { ROUTER_NAMES } from "@/constants/routerNames";
 import * as Firebase from "@/service/FirebaseService";
 
@@ -13,7 +12,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: ROUTER_NAMES.LANGUAGE,
-    component: Home,
+    component: Language,
     meta: { auth: true }
   },
   {

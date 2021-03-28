@@ -18,8 +18,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
+import { LanguageModule } from "@/store/modules/LanguageStore";
 
 @Component({
   components: {
@@ -27,7 +28,8 @@ import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
   },
 })
 export default class LanguageList extends Vue {
-  languages = ["C", "Java", "PHP", "Ruby"];
+  // 言語ストアから初期化
+  languages = LanguageModule.languages;
 
   deleteButtonStyle: ButtonStyle = {
     color: "gray",
@@ -35,10 +37,11 @@ export default class LanguageList extends Vue {
   };
 
   /** 削除ボタン */
-  onClickDelete(item: string) {
-    this.languages = this.languages.filter((language) => {
-      return language !== item;
-    });
+  onClickDelete(language: string) {
+    // 削除アクション
+    LanguageModule.delete(language);
+    // 言語リスト更新
+    this.languages = LanguageModule.languages;
   }
 }
 </script>

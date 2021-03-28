@@ -59,12 +59,14 @@ export default class NavBar extends Vue {
 
   /** 言語一覧に遷移 */
   onClickLanguageList() {
-    this.$router.push({ name: ROUTER_NAMES.LANGUAGE_LIST });
+    if (this.$route.name !== ROUTER_NAMES.LANGUAGE_LIST)
+      this.$router.push({ name: ROUTER_NAMES.LANGUAGE_LIST });
   }
 
   /** 言語追加に遷移 */
   onClickLanguageAdd() {
-    this.$router.push({ name: ROUTER_NAMES.LANGUAGE_ADD });
+    if (this.$route.name !== ROUTER_NAMES.LANGUAGE_ADD)
+      this.$router.push({ name: ROUTER_NAMES.LANGUAGE_ADD });
   }
 
   /** ログアウト処理 */

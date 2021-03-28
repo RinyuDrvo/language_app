@@ -44,7 +44,7 @@ export default class SigninForm extends Vue {
 
   /** サインインクリックイベント */
   @Prop({ required: true })
-  signinEvent!: () => {};
+  signinEvent!: () => Promise<unknown>;
 
   /** クリックイベントで親コンポーネントに入力情報を渡す */
   private onClickSignin() {

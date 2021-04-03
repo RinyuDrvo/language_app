@@ -10,7 +10,7 @@
       <BaseButton
         class="navbar__button--form"
         :clickEvent="onClickLanguageAdd"
-        :buttonStyle="formButtonStyle"
+        :buttonStyle="addButtonStyle"
         >ADD</BaseButton
       >
     </div>
@@ -31,6 +31,7 @@ import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import { ROUTER_NAMES } from "@/constants/routerNames";
+import { COLORS } from "@/constants/colors";
 
 @Component({
   components: {
@@ -43,30 +44,56 @@ export default class NavBar extends Vue {
   isShowErrorModal = false;
 
   listButtonStyle: ButtonStyle = {
-    color: "white",
-    backgroundColor: "#e4bad4",
+    color: COLORS.WHITE,
+    backgroundColor: COLORS.DARK_CHERRY,
   };
 
-  formButtonStyle: ButtonStyle = {
-    color: "white",
-    backgroundColor: "#f6dfeb",
+  addButtonStyle: ButtonStyle = {
+    color: COLORS.WHITE,
+    backgroundColor: COLORS.LIGHT_CHERRY,
   };
 
   logoutButtonStyle: ButtonStyle = {
-    color: "gray",
-    backgroundColor: "#ddd",
+    color: COLORS.GRAY,
+    backgroundColor: COLORS.LIGHT_GRAY,
   };
+
+  // LISTボタン色の切り替え
+  switchListButtonStyle() {
+    this.listButtonStyle.backgroundColor =
+      this.listButtonStyle.backgroundColor === COLORS.LIGHT_CHERRY
+        ? COLORS.DARK_CHERRY
+        : COLORS.LIGHT_CHERRY;
+  }
+
+  // ADDボタン色の切り替え
+  switchAddButtonStyle() {
+    this.addButtonStyle.backgroundColor =
+      this.addButtonStyle.backgroundColor === COLORS.LIGHT_CHERRY
+        ? COLORS.DARK_CHERRY
+        : COLORS.LIGHT_CHERRY;
+  }
+
+  // ボタン色の切り替え
+  switchButtonStyle() {
+    this.switchListButtonStyle();
+    this.switchAddButtonStyle();
+  }
 
   /** 言語一覧に遷移 */
   onClickLanguageList() {
     if (this.$route.name !== ROUTER_NAMES.LANGUAGE_LIST)
       this.$router.push({ name: ROUTER_NAMES.LANGUAGE_LIST });
+
+    this.switchButtonStyle();
   }
 
   /** 言語追加に遷移 */
   onClickLanguageAdd() {
     if (this.$route.name !== ROUTER_NAMES.LANGUAGE_ADD)
       this.$router.push({ name: ROUTER_NAMES.LANGUAGE_ADD });
+
+    this.switchButtonStyle();
   }
 
   /** ログアウト処理 */

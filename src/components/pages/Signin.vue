@@ -28,6 +28,7 @@ import { LoginParams } from "@/models/UserModel";
 import SigninForm from "@/components/molecules/SigninForm.vue";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
 import { ROUTER_NAMES } from "@/constants/routerNames";
+import { COLORS } from "@/constants/colors";
 
 @Component({
   components: {
@@ -43,8 +44,8 @@ export default class Signup extends Vue {
   };
 
   private signinButtonStyle: ButtonStyle = {
-    color: "gray",
-    backgroundColor: "#ddd",
+    color: COLORS.GRAY,
+    backgroundColor: COLORS.LIGHT_GRAY,
   };
 
   private errorMessage = "";

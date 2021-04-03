@@ -6,7 +6,7 @@ import firebase from "firebase";
  * @param {string} password
  * @return {Promise<UserCredential>} user credential
  */
-async function signUp(email: string, password: string) {
+async function signUp(email: string, password: string): Promise<firebase.auth.UserCredential> {
   return await firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
@@ -16,7 +16,7 @@ async function signUp(email: string, password: string) {
  * @param {string} password
  * @return {Promise<UserCredential>} user credential
  */
-async function signIn(email: string, password: string) {
+async function signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
   return await firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
@@ -24,7 +24,7 @@ async function signIn(email: string, password: string) {
  * Firebase Authentication log out
  * @return {Promise<void>}
  */
-async function signOut() {
+async function signOut(): Promise<void> {
   return await firebase.auth().signOut();
 }
 
@@ -32,7 +32,7 @@ async function signOut() {
  * Firebase Authentication onAuthStateChanged
  * @param {(user: firebase.User | null) => void} authEvent
  */
-function onAuthStateChanged(authEvent: (user: firebase.User | null) => void) {
+function onAuthStateChanged(authEvent: (user: firebase.User | null) => void): void {
   firebase.auth().onAuthStateChanged((user) => {
     authEvent(user)
   });

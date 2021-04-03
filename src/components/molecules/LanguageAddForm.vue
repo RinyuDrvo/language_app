@@ -29,7 +29,7 @@ import BaseTextbox from "@/components/atoms/BaseTextbox.vue";
 export default class LanugageAddForm extends Vue {
   private language = "";
 
-  /** サインインクリックイベント */
+  /** 言語登録クリックイベント */
   @Prop({ required: true })
   languageAddEvent!: () => Promise<unknown>;
 

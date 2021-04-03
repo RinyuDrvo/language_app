@@ -28,6 +28,7 @@ import { RegistParams } from "@/models/UserModel";
 import SignupForm from "@/components/molecules/SignupForm.vue";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
 import { ROUTER_NAMES } from "@/constants/routerNames";
+import { COLORS } from "@/constants/colors";
 
 @Component({
   components: {
@@ -43,8 +44,8 @@ export default class Signup extends Vue {
   };
 
   private signupButtonStyle: ButtonStyle = {
-    color: "gray",
-    backgroundColor: "#ddd",
+    color: COLORS.GRAY,
+    backgroundColor: COLORS.LIGHT_GRAY,
   };
 
   private errorMessage = "";

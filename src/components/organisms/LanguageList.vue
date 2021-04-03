@@ -18,9 +18,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
 import { LanguageModule } from "@/store/modules/LanguageStore";
+import { COLORS } from "@/constants/colors";
 
 @Component({
   components: {
@@ -32,8 +33,8 @@ export default class LanguageList extends Vue {
   languages = LanguageModule.languages;
 
   deleteButtonStyle: ButtonStyle = {
-    color: "gray",
-    backgroundColor: "#ddd",
+    color: COLORS.GRAY,
+    backgroundColor: COLORS.LIGHT_GRAY,
   };
 
   /** 削除ボタン */

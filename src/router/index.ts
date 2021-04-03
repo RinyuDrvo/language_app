@@ -57,9 +57,8 @@ router.beforeEach(async (to, from, next) => {
     if (user) {
       // 認証状態
       // 認証時に遷移しない画面はホームに遷移
-      authView === false ?
-        next({ name: ROUTER_NAMES.LANGUAGE_LIST }) :
-        next();
+      if (authView === false)
+        next({ name: ROUTER_NAMES.LANGUAGE_LIST });
     } else {
       // 非認証状態
       // 認証が必要な画面に遷移する場合はリダイレクト
@@ -68,8 +67,6 @@ router.beforeEach(async (to, from, next) => {
 
     next();
   });
-
-  next();
 })
 
 export default router

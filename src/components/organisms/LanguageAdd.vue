@@ -28,8 +28,7 @@ export default class LanguageAdd extends Vue {
   /** 追加する言語 */
   private language = "";
 
-  private isShowValidationErrorDialog = false;
-  private validationErrorMessages: ValidationErrors = [];
+  /** バリデーションUtil */
   private validation = new Validation();
 
   mounted() {
@@ -37,6 +36,7 @@ export default class LanguageAdd extends Vue {
     this.validation.reset();
   }
 
+  /** バリデート */
   validate(): boolean {
     // 入力値の有無
     this.validation.emptyInput<string>(this.language);
@@ -58,6 +58,7 @@ export default class LanguageAdd extends Vue {
 
   /** 言語追加 */
   addLanguage() {
+    // バリデーション実行
     if (!this.validate()) return;
 
     LanguageModule.add(this.language);

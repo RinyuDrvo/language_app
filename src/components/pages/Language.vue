@@ -1,11 +1,14 @@
 <template>
   <div class="hello">
-    <NavBar />
-    <router-view></router-view>
-
-    <auth-error-dialog
-      :errorMessage="errorMessage"
-      v-model="isShowErrorModal"
+    <NavBar :showAuthErrorDialog="showAuthErrorDialog" />
+    <router-view :dialog="showValidErrorDialog"></router-view>
+    <ValidationErrorDialog
+      :errorMessages="validErrorMessages"
+      v-model="isShowValidErrorDialog"
+    />
+    <AuthErrorDialog
+      :errorMessage="authErrorMessage"
+      v-model="isShowAuthErrorDialog"
     />
   </div>
 </template>
@@ -14,28 +17,29 @@
 import { Component, Vue } from "vue-property-decorator";
 import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import NavBar from "@/components/organisms/NavBar.vue";
-import { AuthModule } from "@/store/modules/AuthStore";
-import { ROUTER_NAMES } from "@/constants/routerNames";
+import ValidationErrorDialog from "@/components/organisms/ValidationErrorDialog.vue";
 
 @Component({
   components: {
-    AuthErrorDialog,
     NavBar,
+    AuthErrorDialog,
+    ValidationErrorDialog,
   },
 })
 export default class Language extends Vue {
-  errorMessage = "";
-  isShowErrorModal = false;
+  isShowAuthErrorDialog = false;
+  authErrorMessage = "";
+  isShowValidErrorDialog = false;
+  validErrorMessages: string[] = [];
 
-  async logout() {
-    await AuthModule.signOut()
-      .then(() => {
-        this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
-      })
-      .catch((err) => {
-        this.errorMessage = err.message;
-        this.isShowErrorModal = true;
-      });
+  showAuthErrorDialog(errorMessage: string) {
+    this.authErrorMessage = errorMessage;
+    this.isShowAuthErrorDialog = true;
+  }
+
+  showValidErrorDialog(errorMessages: string[]) {
+    this.validErrorMessages = errorMessages;
+    this.isShowValidErrorDialog = true;
   }
 }
 </script>

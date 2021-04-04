@@ -7,7 +7,7 @@
       v-model="language"
       :inputType="'text'"
       :inputSize="20"
-      :maxLength="50"
+      :maxLength="20"
     />
     <BaseButton :clickEvent="onClickAdd" class="language-add-form__button"
       >ADD</BaseButton
@@ -53,13 +53,11 @@ export default class LanugageAddForm extends Vue {
 
 <style lang="scss" scoped>
 .language-add-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 1rem 10rem;
+  width: 30rem;
 
   &__label {
-    margin-bottom: 0.5rem;
+    display: block;
     color: gray;
   }
 
@@ -68,7 +66,7 @@ export default class LanugageAddForm extends Vue {
   }
 
   &__button {
-    margin-top: 0.5rem;
+    margin-left: 1rem;
   }
 }
 </style>

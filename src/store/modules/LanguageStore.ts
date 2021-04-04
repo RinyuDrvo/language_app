@@ -1,19 +1,28 @@
 import { Module, VuexModule, Mutation, Action, getModule, config } from 'vuex-module-decorators';
 import store from '@/store';
+import { Language, Languages } from "@/models/LanguageModel";
 
 config.rawError = true;
 
 @Module({ dynamic: true, store: store, name: 'LanguageModule', namespaced: true })
-class Language extends VuexModule {
-  private _languages: string[] = ["C", "Java", "PHP", "Ruby", "Python"];
+class LanguageStore extends VuexModule {
+  private _languages: Languages = [];
 
+  /**
+   * set mutation
+   * @param {Language} setLanguage
+   */
   @Mutation
-  set(setLanguage: string) {
+  set(setLanguage: Language) {
     this._languages.push(setLanguage);
   }
 
+  /**
+   * remove mutation
+   * @param {Language} deleteLanguage
+   */
   @Mutation
-  remove(deleteLanguage: string) {
+  remove(deleteLanguage: Language) {
     this._languages = this._languages.filter((language) => {
       return language !== deleteLanguage;
     })
@@ -21,19 +30,19 @@ class Language extends VuexModule {
 
   /**
    * add action
-   * @param {string} language
+   * @param {Language} language
    */
   @Action
-  async add(language: string) {
+  async add(language: Language) {
     this.set(language);
   }
 
   /**
    * delete action
-   * @param {string} language
+   * @param {Language} language
    */
   @Action
-  async delete(language: string) {
+  async delete(language: Language) {
     this.remove(language);
   }
 
@@ -42,4 +51,4 @@ class Language extends VuexModule {
   }
 }
 
-export const LanguageModule = getModule(Language);
+export const LanguageModule = getModule(LanguageStore);

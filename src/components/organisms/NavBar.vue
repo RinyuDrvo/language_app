@@ -20,15 +20,12 @@
       :buttonStyle="logoutButtonStyle"
       >LOG OUT</BaseButton
     >
-
-    <AuthErrorDialog :errorMessage="errorMessage" v-model="isShowErrorModal" />
   </nav>
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Emit, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import BaseButton, { ButtonStyle } from "@/components/atoms/BaseButton.vue";
-import AuthErrorDialog from "@/components/organisms/AuthErrorDialog.vue";
 import { AuthModule } from "@/store/modules/AuthStore";
 import { ROUTER_NAMES } from "@/constants/routerNames";
 import { COLORS } from "@/constants/colors";
@@ -36,10 +33,13 @@ import { COLORS } from "@/constants/colors";
 @Component({
   components: {
     BaseButton,
-    AuthErrorDialog,
   },
 })
 export default class NavBar extends Vue {
+  /** エラーモーダル表示 */
+  @Prop({ required: true })
+  showAuthErrorDialog!: (errorMessage: string) => Promise<unknown>;
+
   errorMessage = "";
   isShowErrorModal = false;
 
@@ -103,8 +103,7 @@ export default class NavBar extends Vue {
         this.$router.push({ name: ROUTER_NAMES.SIGN_IN }).catch(() => {});
       })
       .catch((err) => {
-        this.errorMessage = err.message;
-        this.isShowErrorModal = true;
+        this.showAuthErrorDialog(err.message);
       });
   }
 }

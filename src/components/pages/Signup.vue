@@ -13,10 +13,7 @@
       >SIGN IN</BaseButton
     >
 
-    <auth-error-dialog
-      :errorMessage="errorMessage"
-      v-model="isShowErrorModal"
-    />
+    <AuthErrorDialog :errorMessage="errorMessage" v-model="isShowErrorModal" />
   </div>
 </template>
 

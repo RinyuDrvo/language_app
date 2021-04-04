@@ -61,10 +61,6 @@ export default class LanugageAddForm extends Vue {
     color: gray;
   }
 
-  &__textbox {
-    margin-bottom: 1rem;
-  }
-
   &__button {
     margin-left: 1rem;
   }

@@ -26,9 +26,9 @@ src
 | components/organisms | 一つの機能を構成するコンポーネント |
 | components/pages | viewsから呼び出され、organismsを用いてページを構成するコンポーネント |
 | constants | 定数定義 |
-| models | 型定義 |
+| models | データの型定義 |
 | router | Vue Routerの定義 |
-| service | ビジネスロジック |
+| service | APIの呼び出しやLocalStorageの使用 |
 | store/modules | Vuexストアの定義 |
 | utils | 汎用的なメソッド |
 | views | ページ遷移のために使用する、ページ単位のコンポーネント |

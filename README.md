@@ -22,6 +22,9 @@ Firebase 8.2.6
 - 言語の登録・削除
 - 登録した言語を一覧表示
 
+## ドキュメント
+[ディレクトリ構成](./docs/Directory.md)
+
 ## Project setup
 ```
 yarn install
